@@ -37,7 +37,9 @@
                     </details>
                 </li>
             @endauth
-            <li><a>Item 3</a></li>
+            @foreach (App\Models\Category::where('category_id', null)->get() as $category)
+                @include('partials.submenu', ['category' => $category])
+            @endforeach
         </ul>
     </div>
     <div class="navbar-end gap-2">

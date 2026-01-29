@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
@@ -38,6 +39,11 @@ class PublicController extends Controller
 
     public function user(User $user){
         $posts = $user->posts()->with('user')->withCount('comments', 'likes')->latest()->simplePaginate(16);
+        return view('welcome', compact('posts'));
+    }
+
+    public function category(Category $category){
+        $posts = $category->posts()->with('user')->withCount('comments', 'likes')->latest()->simplePaginate(16);
         return view('welcome', compact('posts'));
     }
 }
